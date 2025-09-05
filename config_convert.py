@@ -9,7 +9,7 @@ logging.basicConfig(
 )
 
 # Domains that should not be proxied now
-ExcludedDomains = ["*.googlevideo.com"]
+ExcludedDomains = []
 
 sc_config_type = list[tuple[list[str], str | None, str]]
 
@@ -94,6 +94,12 @@ def main():
     postset_fn = "ds-postset.json"
     sc_fn = "sc-config.json"
     ds_fn = "ds-config.json"
+    ExcludedDomains_fn = "ExcludedDomains.json"
+
+    global ExcludedDomains
+    with open(ExcludedDomains_fn) as ExcludedDomains_file:
+        ExcludedDomains = load(ExcludedDomains_file)
+    logging.info(f"Loaded ExcludedDomains from {abspath(ExcludedDomains_fn)}")
 
     sc_urls = ["https://github.com/SpaceTimee/Cealing-Host/raw/main/Cealing-Host.json"]
     sc_urls.append(sc_urls[0].replace("github.com", "xget.xi-xu.me/gh"))
@@ -113,6 +119,16 @@ def main():
         file.write(sc_config_text)
 
     ds_config = parse_sc_config(preset_fn, sc_fn, postset_fn)
+
+    def __clear_excluded_rules(key, object, ExcludedDomains):
+        for k in object[key].keys():
+            if k in ExcludedDomains:
+                logging.info(f"Removing excluded {key} rule for domain: {k}")
+                del object[key][k]
+
+    __clear_excluded_rules("intercepts", ds_config["server"], ExcludedDomains)
+    __clear_excluded_rules("preSetIpList", ds_config["server"], ExcludedDomains)
+
     with open(ds_fn, "w") as ds_file:
         dump(ds_config, ds_file, ensure_ascii=False, indent=2)
     logging.info(f"Converted to Dev-Sidecar config and saved as {abspath(ds_fn)}")
