@@ -2,6 +2,7 @@ from json import dump, load
 import logging
 from requests import get
 from os.path import abspath
+from typing import TypedDict
 
 logging.basicConfig(
     level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s"
@@ -10,10 +11,22 @@ logging.basicConfig(
 # Domains that should not be proxied now
 ExcludedDomains = ["*.googlevideo.com"]
 
-sc_config_type = list[list[str], str | None, str]
-ds_config_type = dict[
-    str, dict[str, dict[str, dict[str, str | None]] | dict[str, dict[str, bool]]]
-]
+sc_config_type = list[tuple[list[str], str | None, str]]
+
+
+class ds_config_type(TypedDict):
+    server: dict[
+        str,  # "intercepts" 或 "preSetIpList"
+        dict[
+            str,  # 域名或通配符
+            dict[
+                str,  # ".*" 或 IP 字符串
+                dict[str, str | None] | None,  # {"sni": ...} 或 None
+            ]
+            | list[str]
+            | None,  # IP 列表或 None
+        ],
+    ]
 
 
 def parse_sc_config(preset_fn: str, sc_fn: str, postset_fn: str) -> ds_config_type:
