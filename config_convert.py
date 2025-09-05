@@ -43,7 +43,7 @@ def parse_sc_config(preset_fn: str, sc_fn: str, postset_fn: str) -> ds_config_ty
         target: str = item[2]
         if target == "":
             target = "127.0.0.1"
-        elif target.find("[") == -1:
+        elif target.find("[") != -1:
             continue  # Skip IPv6 addresses
 
         raw_domains: list[str] = item[0]
