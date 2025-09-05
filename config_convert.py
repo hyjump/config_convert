@@ -124,7 +124,7 @@ def main():
     def __clear_excluded_rules(
         key: str, object: dict[str, dict], ExcludedDomains: list[str]
     ):
-        for k in [object[key].keys()]:
+        for k in list(object[key].keys()):
             if k in ExcludedDomains:
                 logging.info(f"Removing excluded {key} rule for domain: {k}")
                 del object[key][k]
