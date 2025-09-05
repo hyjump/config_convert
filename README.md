@@ -2,8 +2,6 @@
 
 Current workflow:
 
-```
-ds-preset.json + converted(get(sc-config.json)) + ds-postset.json - items_from(ExcludedDomains.json)
-```
+`ds-preset.json + converted(get(sc-config.json)) + ds-postset.json - items_from(ExcludedDomains.json)`
 
 Now it runs per 30 minutes.
