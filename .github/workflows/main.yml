@@ -23,7 +23,7 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run config conversion script
-        run: python config_convert.py
+        run: python main.py
 
       - name: Push to Pages repo
         run: |
