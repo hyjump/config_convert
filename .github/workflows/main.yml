@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   schedule:
-    - cron: '0/30 * * * *'  # 每30分钟运行一次
+    - cron: '0,30 * * * *'  # 在每小时的00分和30分运行
   workflow_dispatch:  # 允许手动触发
 
 jobs:

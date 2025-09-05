@@ -120,8 +120,10 @@ def main():
 
     ds_config = parse_sc_config(preset_fn, sc_fn, postset_fn)
 
-    def __clear_excluded_rules(key, object, ExcludedDomains):
-        for k in object[key].keys():
+    def __clear_excluded_rules(
+        key: str, object: dict[str, dict], ExcludedDomains: list[str]
+    ):
+        for k in [object[key].keys()]:
             if k in ExcludedDomains:
                 logging.info(f"Removing excluded {key} rule for domain: {k}")
                 del object[key][k]
