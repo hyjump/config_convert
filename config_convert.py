@@ -41,6 +41,10 @@ def parse_sc_config(preset_fn: str, sc_fn: str, postset_fn: str) -> ds_config_ty
         elif sni == "":
             sni = "none"
 
+        target: str = item[2]
+        if target == "":
+            target = "127.0.0.1"
+
         def __is_ipv6_address(target: str) -> bool:
             # 处理形如 [240e::] 的格式
             if target.startswith("[") and target.endswith("]"):
@@ -52,9 +56,6 @@ def parse_sc_config(preset_fn: str, sc_fn: str, postset_fn: str) -> ds_config_ty
             return False
 
         skip_IPv6 = __is_ipv6_address(target)
-        target: str = item[2]
-        if target == "":
-            target = "127.0.0.1"
 
         raw_domains: list[str] = item[0]
         domains = [
