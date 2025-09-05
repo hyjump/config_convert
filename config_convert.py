@@ -86,6 +86,7 @@ def parse_sc_config(preset_fn: str, sc_fn: str, postset_fn: str) -> ds_config_ty
         if "server" not in ds_config:
             ds_config["server"] = {}
         __deep_merge_dict(ds_config["server"], postset_config["server"])
+    logging.info(f"Loaded postset config from {abspath(postset_fn)}")
     return ds_config
 
 
@@ -130,6 +131,7 @@ def main():
 
     __clear_excluded_rules("intercepts", ds_config["server"], ExcludedDomains)
     __clear_excluded_rules("preSetIpList", ds_config["server"], ExcludedDomains)
+    logging.info("Cleared all excluded domain rules")
 
     with open(ds_fn, "w") as ds_file:
         dump(ds_config, ds_file, ensure_ascii=False, indent=2)
