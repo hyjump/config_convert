@@ -54,7 +54,7 @@ def parse_sc_config(preset_fn: str, sc_fn: str, postset_fn: str) -> ds_config_ty
             and ((domain := raw_domain.lstrip("$#")) not in ExcludedDomains)
         ]
         domain_rules = "|".join(domains)
-        if len(raw_domains) > 1:
+        if len(domains) > 1:
             domain_rules = f"({domain_rules})"
 
         if domain_rules:
