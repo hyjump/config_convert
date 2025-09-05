@@ -3,6 +3,7 @@ import logging
 from requests import ConnectTimeout, ReadTimeout, Timeout, get
 from os.path import abspath
 from typing import TypedDict
+from ipaddress import ip_address, IPv6Address
 
 logging.basicConfig(
     level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s"
@@ -40,12 +41,20 @@ def parse_sc_config(preset_fn: str, sc_fn: str, postset_fn: str) -> ds_config_ty
         elif sni == "":
             sni = "none"
 
-        skip_IPv6 = False
+        def __is_ipv6_address(target: str) -> bool:
+            # 处理形如 [240e::] 的格式
+            if target.startswith("[") and target.endswith("]"):
+                addr = target.strip("[]")
+                try:
+                    return ip_address(addr).version == 6
+                except ValueError:
+                    return False
+            return False
+
+        skip_IPv6 = __is_ipv6_address(target)
         target: str = item[2]
         if target == "":
             target = "127.0.0.1"
-        elif target.find("[") != -1:
-            skip_IPv6 = True
 
         raw_domains: list[str] = item[0]
         domains = [
