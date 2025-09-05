@@ -10,3 +10,8 @@
 `ds-preset.json + converted(get(sc-config.json)) + ds-postset.json - items_from(ExcludedDomains.json)`
 
 当前每30分钟更新一次配置。
+
+## 开发
+请分叉dev分支，更新也请向dev分支发PR。
+推送PR前请在本地测试无bug后进行。
+main分支仅用于生产用途。
