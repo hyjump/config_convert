@@ -40,11 +40,12 @@ def parse_sc_config(preset_fn: str, sc_fn: str, postset_fn: str) -> ds_config_ty
         elif sni == "":
             sni = "none"
 
+        skip_IPv6 = False
         target: str = item[2]
         if target == "":
             target = "127.0.0.1"
         elif target.find("[") != -1:
-            continue  # Skip IPv6 addresses
+            skip_IPv6 = True
 
         raw_domains: list[str] = item[0]
         domains = [
@@ -58,13 +59,14 @@ def parse_sc_config(preset_fn: str, sc_fn: str, postset_fn: str) -> ds_config_ty
             domain_rules = f"({domain_rules})"
 
         if domain_rules:
-            ds_config["server"]["intercepts"][domain_rules] = {}
-            ds_config["server"]["intercepts"][domain_rules][".*"] = {}
-            ds_config["server"]["intercepts"][domain_rules][".*"]["sni"] = sni
+            ds_config["server"].setdefault("intercepts", {}).setdefault(
+                domain_rules, {}
+            ).setdefault(".*", {})["sni"] = sni
 
-            if domain_rules not in ds_config["server"]["preSetIpList"]:
-                ds_config["server"]["preSetIpList"][domain_rules] = {}
-            ds_config["server"]["preSetIpList"][domain_rules][target] = True
+            if not skip_IPv6:
+                ds_config["server"].setdefault("preSetIpList", {}).setdefault(
+                    domain_rules, {}
+                )[target] = True
 
     # 读取 postset_fn 并合并到 ds_config
     with open(postset_fn) as postset_file:
