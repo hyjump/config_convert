@@ -60,6 +60,11 @@
         ".*": {
           "sni": "behance.net"
         }
+      },
+      "*.googlevideo.com": {
+        ".*": {
+          "sni": null
+        }
       }
     },
     "preSetIpList": {
@@ -98,7 +103,8 @@
       },
       "*behance.net": {
         "[2001:67c:2960:6464::9765:41c5]": true
-      }
+      },
+      "*.googlevideo.com": null
     }
   }
 }
