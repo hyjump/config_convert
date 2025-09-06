@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Generate Dev-Sidecar Config
 
 on:
   schedule:
@@ -25,11 +25,8 @@ jobs:
       - name: Run config converting script
         run: python main.py
 
-      - name: Push to Pages repo
+      - name: Commit and push generated config
         run: |
-          git clone https://x-access-token:${{ secrets.PAT }}@github.com/cute-omega/cute-omega.github.io.git pages-repo
-          cp ds-config.json pages-repo/
-          cd pages-repo
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           git add ds-config.json
