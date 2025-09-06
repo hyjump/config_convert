@@ -1,5 +1,4 @@
 sc-config.json
-ds-config.json
 dist/
 __pycache__/
 *.pyc
