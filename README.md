@@ -1,9 +1,10 @@
 # Sheas Cealer 转 Dev-Sidecar 的配置转换器
 
-把Sheas Cealer的配置文件转换成Dev-Sidecar的配置文件
+把Sheas Cealer的配置文件转换成Dev-Sidecar的配置文件,项目来自https://github.com/cute-omega/config_convert
+主要是为了满足一些自定义需求
 
 ## 用法：
-把`https://cute-omega.github.io/ds-config.json`填入dev-sidecar的个人远程配置，然后点击“更新远程配置”以立即生效。之后dev-sidecar会自动更新配置。
+把`https://raw.githubusercontent.com/{your-username}/{your-repo}/main/ds-config.json`填入dev-sidecar的个人远程配置，然后点击“更新远程配置”以立即生效。之后dev-sidecar会自动更新配置。
 
 ## 当前工作流：
 
