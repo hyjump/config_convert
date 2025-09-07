@@ -20,7 +20,7 @@
 
 ## 本地运行
 
-尽管这看起来是显而易见的，我们仍然给出运行脚本。
+尽管这看起来是显而易见的，我们仍然给出运行脚本的步骤。
 
 ```bash
 git clone https://github.com/cute-omega/config_convert.git
