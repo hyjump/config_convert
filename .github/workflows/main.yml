@@ -27,6 +27,11 @@ jobs:
       - name: Run config converting script
         run: python main.py
 
+      - name: Copy config file to new location for temporary migration solution
+        run: |
+          mkdir ./other-assets
+          cp ./ds-config.json ./other-assets/ds-config.json
+
       - name: Push to Pages repo
         run: |
           git clone https://x-access-token:${{ secrets.PAT }}@github.com/cute-omega/cute-omega.github.io.git pages-repo
