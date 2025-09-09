@@ -29,7 +29,7 @@ jobs:
 
       - name: Copy config file to new location for temporary migration solution
         run: |
-          mkdir ./other-assets
+          mkdir -p ./other-assets
           cp ./ds-config.json ./other-assets/ds-config.json
 
       - name: Push to Pages repo
