@@ -27,18 +27,16 @@ jobs:
       - name: Run config converting script
         run: python main.py
 
-      - name: Copy config file to new location for temporary migration solution
-        run: |
-          mkdir -p ./other-assets
-          cp ./ds-config.json ./other-assets/ds-config.json
-
       - name: Push to Pages repo
         run: |
           git clone https://x-access-token:${{ secrets.PAT }}@github.com/cute-omega/cute-omega.github.io.git pages-repo
           cp ds-config.json pages-repo/
+          mkdir -p pages-repo/other-assets
+          cp ds-config.json pages-repo/other-assets/
           cd pages-repo
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           git add ds-config.json
-          git commit -m "Update ds-config.json" || echo "No changes to commit"
+          git add other-assets/ds-config.json
+          git commit -m "Update ds-config.json and copy it to new location for temporary migration solution" || echo "No changes to commit"
           git push
