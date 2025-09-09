@@ -5,7 +5,7 @@
 ## 用法：
 把~~https://cute-omega.github.io/ds-config.json~~ 填入dev-sidecar的个人远程配置，然后点击“更新远程配置”以立即生效。之后dev-sidecar会自动更新配置。
 
-**通知：请将配置地址修改为https://cute-omega.github.io/other-assets/ds-config.json 。该变更是为了更好的适应未来扩展所做出的，目前尚未实际进入生产分支，但所有用户仍应当尽快完成变更。**
+**通知：请将配置地址修改为https://cute-omega.github.io/other-assets/ds-config.json 。该变更是为了更好的适应未来扩展所做出的，目前已经进入生产分支迁移阶段，所有用户应当尽快完成变更。**
 
 | **预计变更时间表：(UTC+8)** |                                                              |
 | --------------------------- | ------------------------------------------------------------ |
