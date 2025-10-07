@@ -29,7 +29,7 @@ jobs:
 
       - name: Push to Pages repo
         run: |
-          git clone https://x-access-token:${{ secrets.PAT }}@github.com/cute-omega/cute-omega.github.io.git pages-repo
+          git clone https://x-access-token:${{ secrets.PAT }}@github.com/hyjump/config_convert.git pages-repo
           cp ds-config.json pages-repo/
           mkdir -p pages-repo/other-assets
           cp ds-config.json pages-repo/other-assets/
