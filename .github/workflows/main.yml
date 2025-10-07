@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Auto Push ds-config.json
 permissions:
   contents: write
 
@@ -27,7 +27,7 @@ jobs:
       - name: Run config converting script
         run: python main.py
 
-      - name: Push to Pages repo
+      - name: Push to config_convert repo
         run: |
           git clone https://x-access-token:${{ secrets.PAT }}@github.com/hyjump/config_convert.git pages-repo
           cp ds-config.json pages-repo/
@@ -36,7 +36,7 @@ jobs:
           cd pages-repo
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
-          git add ds-config.json
-          git add other-assets/ds-config.json
-          git commit -m "Update ds-config.json and copy it to new location for temporary migration solution" || echo "No changes to commit"
+          git add -f ds-config.json
+          git add -f other-assets/ds-config.json
+          git commit -m "Auto update ds-config.json" || echo "No changes to commit"
           git push
